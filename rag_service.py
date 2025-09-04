@@ -225,18 +225,6 @@ Answer:"""
 
 # === Quick Test ===
 if __name__ == "__main__":
-    DB_CONFIG = {
-        'host': 'localhost',
-        'database': 'mydb',
-        'user': 'myuser', 
-        'password': 'mypassword',
-        'port': 5434
-    }
-  
-
-    GEMINI_API_KEY = "AIzaSyDhrPLQnZBQmXJ7ufV_F-MefwKiXzRdkRA"
-    TABLE_NAME = "scraped_pages"
-
     rag = GeminiRAG(DB_CONFIG, GEMINI_API_KEY, TABLE_NAME)
 
     # Pure embedding search
