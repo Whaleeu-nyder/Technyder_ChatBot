@@ -1,18 +1,18 @@
 # Core
-streamlit==1.37.0
-psycopg2-binary==2.9.9
-sqlalchemy==2.0.32
-python-dotenv==1.0.1
+streamlit
+psycopg2-binary
+sqlalchemy
+python-dotenv
 
-pandas==2.2.2
-numpy==1.26.4
+pandas
+numpy
 
-requests==2.32.3
-beautifulsoup4==4.12.3
+requests
+beautifulsoup4
 
 
 # OpenAI / Google Generative AI
-google-generativeai==0.7.2
+google-generativeai
 
 # Logging and utilities
-tqdm==4.66.5
+tqdm
