@@ -1,0 +1,23 @@
+# Core
+streamlit==1.37.0
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.32
+python-dotenv==1.0.1
+
+# Data handling
+pandas==2.2.2
+numpy==1.26.4
+
+# Web scraping (if you scrape technyder.co directly)
+requests==2.32.3
+beautifulsoup4==4.12.3
+
+# Vector similarity + embeddings
+pgvector==0.2.5
+
+# OpenAI / Google Generative AI
+openai==1.43.0
+google-generativeai==0.7.2
+
+# Logging and utilities
+tqdm==4.66.5
