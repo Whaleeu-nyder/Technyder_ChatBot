@@ -88,10 +88,9 @@ def run_rag_app():
     # Search settings
     st.sidebar.subheader("Search Settings")
     table_name =  f"{TABLE_NAME}"
-    embedding_field = st.sidebar.selectbox(
-        "Embedding Field",
-        ["combined_embedding", "title_embedding", "content_embedding"]
-    )
+    embedding_field = "combined_embedding"
+    
+    #t.sidebar.selectbox("Embedding Field",["combined_embedding", "title_embedding", "content_embedding"] )
     max_sources = st.sidebar.slider("Max Sources", 1, 10, 5)
 
     # Main two-column layout
