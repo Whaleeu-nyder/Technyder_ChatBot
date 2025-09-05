@@ -78,10 +78,9 @@ def run_rag_app():
     )
 
     # Sidebar for configuration
-    st.sidebar.header("Configuration")
+    
 
     # Database config
-    st.sidebar.subheader("Database Settings")
     db_config = DB_CONFIG
     # API Key
     gimini_note = "API key is loaded from secrets"
