@@ -141,7 +141,8 @@ class GeminiRAG:
 
     def ask_question(self, question: str, max_sources: int = 50,
                      embedding_field: str = "combined_embedding",
-                     hybrid: bool = False) -> Dict:
+                     hybrid: bool = False,
+                     show_sources: bool = False) -> Dict:
         """RAG pipeline with embeddings + optional hybrid search"""
         try:
             search_results = self.search_content(
@@ -163,10 +164,16 @@ Here's what I can tell you:""",
                         temperature=0.8,
                     )
                 )
+                if show_sources:
+                    return {
+                        "answer": response.text,
+                        "sources": [],
+                        "confidence": 0.5,
+                        "num_sources": 0,
+                    }
                 return {
                     "answer": response.text,
-                    "sources": [],
-                    "confidence": 0.5
+                    "confidence": 0.5,
                 }
 
 
@@ -207,20 +214,25 @@ Use phrases like "I found that..." or "What's really interesting is..." or "From
                 )
             )
 
-            sources = [
-                {
-                    "title": result.title,
-                    "url": result.url,
-                    "relevance_score": result.relevance_score
+            if show_sources:
+                sources = [
+                    {
+                        "title": result.title,
+                        "url": result.url,
+                        "relevance_score": result.relevance_score
+                    }
+                    for result in search_results
+                ]
+                return {
+                    "answer": response.text,
+                    "sources": sources,
+                    "confidence": 0.85,
+                    "num_sources": len(search_results),
                 }
-                for result in search_results
-            ]
 
             return {
                 "answer": response.text,
-                "sources": sources,
-                "confidence": 0.85   ,
-                "num_sources": len(search_results)
+                "confidence": 0.85,
             }
 
         except Exception as e:
@@ -237,6 +249,5 @@ if __name__ == "__main__":
     rag = GeminiRAG(DB_CONFIG, GEMINI_API_KEY, TABLE_NAME)
 
     # Pure embedding search
-    res = rag.ask_question("Based on the information from technyder.co, what kinds of technology and AI services does Technyder provide—such as custom software, DevOps, automation, machine learning, or chatbot development—and how do these services help businesses improve efficiency or transform digitally?", embedding_field="combined_embedding")
+    res = rag.ask_question("Based on the information from technyder.co, what kinds of technology and AI services does Technyder provide—such as custom software, DevOps, automation, machine learning, or chatbot development—and how do these services help businesses improve efficiency or transform digitally?", embedding_field="combined_embedding", show_sources=False)
     print("Answer:", res["answer"])
-    print("Sources:", res["sources"])
