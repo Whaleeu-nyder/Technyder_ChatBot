@@ -21,7 +21,7 @@ TABLE_NAME = st.secrets["table"]["name"]
 def run_rag_app():
     st.set_page_config(page_title="Technyder RAG Search", layout="wide")
 
-    st.title("🔎 Technyder RAG with Gemini + pgvector")
+    st.title("🔎 Technyder")
     st.markdown("Ask questions based on content scraped from **technyder.co**")
 
     # Sidebar for configuration
@@ -64,8 +64,7 @@ def run_rag_app():
             # Show Answer
             st.subheader("Answer")
             st.write(result["answer"])
-            st.caption(f"Confidence: {result['confidence']:.2f}")
-
+          
 
 # Run app
 if __name__ == "__main__":
