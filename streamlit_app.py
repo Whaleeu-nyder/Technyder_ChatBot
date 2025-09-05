@@ -66,13 +66,6 @@ def run_rag_app():
             st.write(result["answer"])
             st.caption(f"Confidence: {result['confidence']:.2f}")
 
-            # Show Sources
-            st.subheader("Sources")
-            if result["sources"]:
-                for i, src in enumerate(result["sources"], 1):
-                    st.markdown(f"**[{i}. {src['title']}]({src['url']})** — relevance: {src['relevance_score']:.2f}")
-            else:
-                st.info("No sources found.")
 
 # Run app
 if __name__ == "__main__":
