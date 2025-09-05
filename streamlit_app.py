@@ -87,7 +87,7 @@ def run_rag_app():
     gemini_api_key = GEMINI_API_KEY
     # Search settings
     st.sidebar.subheader("Search Settings")
-    table_name = st.sidebar.text_input("Table name", f"{TABLE_NAME}")
+    table_name =  f"{TABLE_NAME}"
     embedding_field = st.sidebar.selectbox(
         "Embedding Field",
         ["combined_embedding", "title_embedding", "content_embedding"]
