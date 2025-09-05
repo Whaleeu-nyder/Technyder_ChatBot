@@ -153,10 +153,14 @@ class GeminiRAG:
             if not search_results or search_results[0].relevance_score < 0.3:
                 # fallback: let Gemini answer directly
                 response = self.model.generate_content(
-                    f"Answer the following question based on your knowledge:\n\n{question}",
+                    f"""Hey! Great question about "{question}". 
+
+I don't have specific details about this in our Technyder knowledge base right now, but I'd love to help you out! Let me share what I know about this topic in general, and I'll make sure to keep it conversational and easy to understand.
+
+Here's what I can tell you:""",
                     generation_config=genai.types.GenerationConfig(
                         max_output_tokens=400,
-                        temperature=0.7,
+                        temperature=0.8,
                     )
                 )
                 return {
@@ -183,19 +187,23 @@ Content: {snippet}
 
             context = "\n".join(context_parts)
 
-            prompt = f"""You are a helpful assistant. Answer the question based only on the provided context.
+            prompt = f"""Hey there! I found some great information about your question. Let me share what I discovered:
 
 {context}
 
-Question: {question}
+So, to answer your question about "{question}" - here's what I can tell you:
 
-Answer:"""
+I want you to respond as if you're having a friendly conversation with someone who's genuinely interested in learning about Technyder. Be warm, engaging, and conversational. Don't just list facts - tell a story or explain things in a way that feels natural and human. 
+
+IMPORTANT: Do NOT mention sources, citations, or reference numbers in your response. Just give a natural, conversational answer as if you're sharing knowledge you know. Don't say things like "Source 1 states" or "According to the information" - just speak naturally about what you know.
+
+Use phrases like "I found that..." or "What's really interesting is..." or "From what I can see..." but make it sound like you're excited to share this information with them!"""
 
             response = self.model.generate_content(
                 prompt,
                 generation_config=genai.types.GenerationConfig(
                     max_output_tokens=500,
-                    temperature=0.3,
+                    temperature=0.8,
                 )
             )
 
