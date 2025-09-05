@@ -153,7 +153,13 @@ class GeminiRAG:
             if not search_results or search_results[0].relevance_score < 0.3:
                 # fallback: let Gemini answer directly
                 response = self.model.generate_content(
-                    f"Answer the following question based on your knowledge:\n\n{question}",
+                    f"""I'm here to help you learn about Technyder's technology services! 
+
+Your question: {question}
+
+While I don't have specific information from our knowledge base about this topic, I'd be happy to share what I know in a friendly, conversational way. Let me give you the best answer I can based on my general knowledge about technology services and business solutions.
+
+Here's what I can tell you:""",
                     generation_config=genai.types.GenerationConfig(
                         max_output_tokens=400,
                         temperature=0.5,
@@ -183,20 +189,28 @@ Content: {snippet}
 
             context = "\n".join(context_parts)
 
-            prompt = f"""You are a helpful assistant. Answer the question based only on the provided context.
+            prompt = f"""You're a friendly and knowledgeable assistant helping someone learn about Technyder's services and technology solutions. 
 
-Context:
+Here's what I found for you:
+
 {context}
 
-Question: {question}
+Now, let me answer your question: {question}
 
-Answer:"""
+Please provide a helpful, conversational response that:
+- Sounds natural and human-like
+- Uses a warm, professional tone
+- Explains things clearly without being overly technical
+- If you're not sure about something, say so honestly
+- Feel free to add context or examples when helpful
+
+Here's my answer:"""
 
             response = self.model.generate_content(
                 prompt,
                 generation_config=genai.types.GenerationConfig(
                     max_output_tokens=500,
-                    temperature=0.3,
+                    temperature=0.7,
                 )
             )
 
