@@ -132,11 +132,6 @@ def run_rag_app():
 
     with right_col:
         st.markdown("<div class='tech-card'>", unsafe_allow_html=True)
-        st.subheader("Search Options")
-        st.caption("%s" % gimini_note)
-        st.write(":orange[Embedding field]", embedding_field)
-        st.write(":orange[Max sources]", max_sources)
-        st.write(":orange[Table]", table_name)
         st.markdown("</div>", unsafe_allow_html=True)
 
     # Footer with brand bar
